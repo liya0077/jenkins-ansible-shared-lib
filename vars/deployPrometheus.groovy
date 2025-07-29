@@ -2,11 +2,13 @@ def call(Map config = [:]) {
     def SLACK_CHANNEL       = config.SLACK_CHANNEL_NAME ?: 'jenkins-neuroninja'
     def ENVIRONMENT         = config.ENVIRONMENT ?: 'dev'
     def ACTION_MESSAGE      = config.ACTION_MESSAGE ?: "Deploying Prometheus to ${ENVIRONMENT}"
-    def CODE_BASE_PATH = config.CODE_BASE_PATH ?: 'Ansible-Prometheus-Install'
+    def CODE_BASE_PATH      = config.CODE_BASE_PATH ?: 'Ansible-Prometheus-Install'
     def KEEP_APPROVAL_STAGE = (config.KEEP_APPROVAL_STAGE ?: 'false').toBoolean()
 
     stage('Clone Repo') {
-        git branch: 'main', url: 'https://github.com/liya0077/Ansible-Prometheus-Install.git'
+        dir(CODE_BASE_PATH) {
+            git branch: 'main', url: 'https://github.com/liya0077/Ansible-Prometheus-Install.git'
+        }
     }
 
     if (KEEP_APPROVAL_STAGE) {
@@ -20,17 +22,22 @@ def call(Map config = [:]) {
     stage('Run Ansible Playbook') {
         dir(CODE_BASE_PATH) {
             sh """#!/bin/bash
+                set -e
+
+                echo "📂 Files inside the repo:"
+                ls -la
+
                 if [ ! -d "venv" ]; then
                     echo "✅ Creating virtual environment..."
                     python3 -m venv venv
                 fi
 
                 echo "✅ Activating virtual environment..."
-                source venv/bin/activate && \
+                source venv/bin/activate
 
                 echo "✅ Installing dependencies..."
-                pip install --upgrade pip && \
-                pip install ansible boto boto3 && \
+                pip install --upgrade pip
+                pip install ansible boto boto3
 
                 echo "✅ Running Ansible Playbook..."
                 ansible-playbook -i inventory.aws_ec2.yml site.yml --extra-vars "env=${ENVIRONMENT}"
