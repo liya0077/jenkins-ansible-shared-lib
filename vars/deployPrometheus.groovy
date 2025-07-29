@@ -26,11 +26,11 @@ def call(Map config = [:]) {
                 fi
 
                 echo "✅ Activating virtual environment..."
-                source venv/bin/activate
+                source venv/bin/activate && \
 
                 echo "✅ Installing dependencies..."
-                pip install --upgrade pip
-                pip install ansible boto boto3
+                pip install --upgrade pip && \
+                pip install ansible boto boto3 && \
 
                 echo "✅ Running Ansible Playbook..."
                 ansible-playbook -i inventory.aws_ec2.yml site.yml --extra-vars "env=${ENVIRONMENT}"
