@@ -20,6 +20,10 @@ def call(Map config = [:]) {
     stage('Run Ansible Playbook') {
         dir(CODE_BASE_PATH) {
             sh """#!/bin/bash
+                echo "📂 Current working directory:"
+                pwd
+                echo "📁 Listing all files and folders recursively:"
+                ls -R
                 if [ ! -d "venv" ]; then
                     echo "✅ Creating virtual environment..."
                     python3 -m venv venv
