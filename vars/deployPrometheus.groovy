@@ -19,7 +19,7 @@ def call(Map config = [:]) {
 
     stage('Run Ansible Playbook') {
         dir(CODE_BASE_PATH) {
-            sh """
+            sh """#!/bin/bash
                 if [ ! -d "venv" ]; then
                     echo "✅ Creating virtual environment..."
                     python3 -m venv venv
