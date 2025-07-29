@@ -2,7 +2,7 @@ def call(Map config = [:]) {
     def SLACK_CHANNEL       = config.SLACK_CHANNEL_NAME ?: 'jenkins-neuroninja'
     def ENVIRONMENT         = config.ENVIRONMENT ?: 'dev'
     def ACTION_MESSAGE      = config.ACTION_MESSAGE ?: "Deploying Prometheus to ${ENVIRONMENT}"
-    def CODE_BASE_PATH      = config.CODE_BASE_PATH ?: 'Ansible-Prometheus-Install/Ansible-Prometheus-install'
+    def CODE_BASE_PATH      = config.CODE_BASE_PATH ?: 'Ansible-Prometheus-Install'
     def KEEP_APPROVAL_STAGE = (config.KEEP_APPROVAL_STAGE ?: 'false').toBoolean()
 
     stage('Clone Repo') {
