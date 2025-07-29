@@ -6,7 +6,7 @@ def call(Map config = [:]) {
     def KEEP_APPROVAL_STAGE = (config.KEEP_APPROVAL_STAGE ?: 'false').toBoolean()
 
     stage('Clone Repo') {
-        git 'https://github.com/liya0077/Ansible-Prometheus-Install.git'
+        git branch: 'main', url: 'https://github.com/liya0077/Ansible-Prometheus-Install.git'
     }
 
     if (KEEP_APPROVAL_STAGE) {
