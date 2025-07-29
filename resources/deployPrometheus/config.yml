@@ -1,5 +1,5 @@
 SLACK_CHANNEL_NAME: "jenkins-neuroninja"
 ENVIRONMENT: "prod"
-CODE_BASE_PATH : "Ansible-Prometheus-Install/Ansible-Prometheus-install"
+CODE_BASE_PATH : "Ansible-Prometheus-Install"
 ACTION_MESSAGE: "Prometheus deployment started"
 KEEP_APPROVAL_STAGE: true
