@@ -25,12 +25,10 @@ def call(Map config = [:]) {
     }
 
     stage('Waiting for instace to get ready') {
-        steps {
             sh '''
                 echo "Waiting for instances to be ready..."
                 sleep 60
             '''
-        }
     }
     
 
