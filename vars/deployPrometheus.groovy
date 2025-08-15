@@ -18,7 +18,7 @@ def call(Map config = [:]) {
         dir(TERRAFORM_REPO_PATH) {
             sh """
                 terraform init
-                terraform plan -out=tfplan -var="env=${ENVIRONMENT}"
+                terraform plan -out=tfplan
                 terraform apply -auto-approve tfplan
             """
         }
