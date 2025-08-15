@@ -42,7 +42,7 @@ def call(Map config = [:]) {
     // 4️⃣ Run Ansible
     stage('Run Ansible Playbook') {
         dir(ANSIBLE_REPO_PATH) {
-            sh """
+            sh """#!/bin/bash
                 set -e
                 echo "📂 Files inside the repo:"
                 ls -la
