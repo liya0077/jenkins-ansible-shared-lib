@@ -24,13 +24,15 @@ def call(Map config = [:]) {
         }
     }
 
-    if (KEEP_APPROVAL_STAGE) {
-        stage('User Approval') {
-            timeout(time: 5, unit: 'MINUTES') {
-                input message: "Proceed with Prometheus deployment to ${ENVIRONMENT}?"
-            }
+    stage('Waiting for instace to get ready') {
+        steps {
+            sh '''
+                echo "Waiting for instances to be ready..."
+                sleep 60
+            '''
         }
     }
+    
 
     // 3️⃣ Clone Ansible repo
     stage('Clone Ansible Repo') {
