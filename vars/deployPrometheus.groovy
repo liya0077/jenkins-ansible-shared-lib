@@ -60,9 +60,3 @@ def call(Map config = [:]) {
             '''
         }
     }
-
-    // 5️⃣ Notify
-    stage('Notify Slack') {
-        slackSend(channel: SLACK_CHANNEL, message: "${ACTION_MESSAGE} ✅ completed on ${ENVIRONMENT}")
-    }
-}
