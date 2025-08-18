@@ -42,7 +42,8 @@ def call(Map config = [:]) {
     // 4️⃣ Run Ansible
     stage('Run Ansible Playbook') {
         dir(ANSIBLE_REPO_PATH) {
-            sh """#!/bin/bash
+            sh '''
+                #!/bin/bash
                 set -e
                 echo "📂 Files inside the repo:"
                 ls -la
@@ -56,7 +57,7 @@ def call(Map config = [:]) {
                 pip install ansible boto boto3
 
                 ansible-playbook -i inventory.aws_ec2.yml site.yml --extra-vars "env=${ENVIRONMENT}"
-            """
+            '''
         }
     }
 
