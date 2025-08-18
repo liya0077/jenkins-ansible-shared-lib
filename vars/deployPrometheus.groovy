@@ -17,7 +17,7 @@ def call(Map config = [:]) {
     stage('Terraform Apply') {
         dir(TERRAFORM_REPO_PATH) {
             sh """
-                terraform init
+                terraform init -reconfigure
                 terraform plan -out=tfplan
                 terraform apply -auto-approve tfplan
             """
