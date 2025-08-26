@@ -39,8 +39,6 @@ def call(Map config = [:]) {
             dir(ANSIBLE_REPO_PATH) {
                 sh '''#!/bin/bash
                     set -e
-                    echo "📂 Files inside the repo:"
-                    ls -la
 
                     if [ ! -d "venv" ]; then
                         python3 -m venv venv
