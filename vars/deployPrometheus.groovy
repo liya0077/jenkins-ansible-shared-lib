@@ -12,11 +12,23 @@ def call(Map config = [:]) {
             }
         }
 
-        stage('Terraform Apply') {
+        stage('Terraform Init') {
             dir(TERRAFORM_REPO_PATH) {
                 sh """
                     terraform init
+                """
+            }
+        }
+        stage('Terraform plan') {
+            dir(TERRAFORM_REPO_PATH) {
+                sh """
                     terraform plan -out=tfplan
+                """
+            }
+        }
+        stage('Terraform Apply') {
+            dir(TERRAFORM_REPO_PATH) {
+                sh """
                     terraform apply -auto-approve tfplan
                 """
             }
